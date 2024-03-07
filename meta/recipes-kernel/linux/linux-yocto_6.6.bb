@@ -28,8 +28,12 @@ SRCREV_machine:qemuriscv32 ?= "a04baee60b5a7cf4d9c0c2f4856c6d5bb9b98074"
 SRCREV_machine:qemux86 ?= "a04baee60b5a7cf4d9c0c2f4856c6d5bb9b98074"
 SRCREV_machine:qemux86-64 ?= "a04baee60b5a7cf4d9c0c2f4856c6d5bb9b98074"
 SRCREV_machine:qemumips64 ?= "8e7605bafdfeb842396292181d524b183a1e13d6"
+SRCREV_machine:genericarm64 ?= "a04baee60b5a7cf4d9c0c2f4856c6d5bb9b98074"
 SRCREV_machine ?= "a04baee60b5a7cf4d9c0c2f4856c6d5bb9b98074"
 SRCREV_meta ?= "8cd63077f67a0f7ff639a2ff24c82b09d71048a4"
+
+# Override meta
+SRCREV_meta = "${AUTOREV}"
 
 # set your preferred provider of linux-yocto to 'linux-yocto-upstream', and you'll
 # get the <version>/base branch, which is pure upstream -stable, and the same
@@ -40,8 +44,10 @@ SRCREV_machine:class-devupstream ?= "9b4a8eac17f0d840729384618b4b1e876233026c"
 PN:class-devupstream = "linux-yocto-upstream"
 KBRANCH:class-devupstream = "v6.6/base"
 
+#SRC_URI = "git://git.yoctoproject.org/linux-yocto.git;name=machine;branch=${KBRANCH};protocol=https \
+#           git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-6.6;destsuffix=${KMETA};protocol=https"
 SRC_URI = "git://git.yoctoproject.org/linux-yocto.git;name=machine;branch=${KBRANCH};protocol=https \
-           git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-6.6;destsuffix=${KMETA};protocol=https"
+           git://github.com/wmamills/yocto-kernel-cache.git;type=kmeta;name=meta;branch=wam-wip;destsuffix=${KMETA};protocol=https;rebaseable=1"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 LINUX_VERSION ?= "6.6.20"
